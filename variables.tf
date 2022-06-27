@@ -42,6 +42,11 @@ variable "vpc_enable_nat_gateway" {
   type          = bool
 }
 
+variable "security_group" {
+  description = "Name of security group"
+  default     = "sg_jk_tf"
+}
+
 variable "vpc_tags" {
   description   = "Tags To Apply To Resources Created By VPC Module"
   default = {
