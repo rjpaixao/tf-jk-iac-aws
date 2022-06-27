@@ -30,7 +30,7 @@ module "vpc" {
 
 #Create security group with firewall rules
 resource "aws_security_group" "my_security_group" {
-  name        = var.security_group
+  name        = var.vpc_security_group
   description = "security group for Ec2 instance"
 
   ingress {
