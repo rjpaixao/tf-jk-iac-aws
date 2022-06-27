@@ -41,7 +41,7 @@ module "ec2-instance" {
   instance_type          = "t2.micro"
   key_name               = "DevOps"
   monitoring             = true
-  vpc_security_group_ids = "sg-0faab6be048f7b0a6"
+  vpc_security_group_ids = [module.vpc.default_security_group_id]
   subnet_id              = module.vpc.public_subnets[0]
 
   tags = {
