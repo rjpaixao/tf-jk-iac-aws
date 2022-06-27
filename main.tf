@@ -25,7 +25,7 @@ module "vpc" {
   public_subnets      = var.vpc_public_subnets  
   enable_nat_gateway  = var.vpc_enable_nat_gateway
   tags                = var.vpc_tags
-  security_group      = var.vpc_secutity_group
+  security_group      = var.vpc_security_group
 }
 
 #Create security group with firewall rules
@@ -74,11 +74,7 @@ module "ec2-instance" {
   instance_type          = "t2.micro"
   key_name               = "DevOps"
   monitoring             = true
-<<<<<<< HEAD
   security_group         = module.vpc_secutity_group
-=======
-  vpc_security_group     = [var.security_group]
->>>>>>> deec26057887b0230a4e727590b9d59cfc13735b
   subnet_id              = module.vpc.public_subnets[0]
 
   tags = {
