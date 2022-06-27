@@ -25,39 +25,6 @@ module "vpc" {
   public_subnets      = var.vpc_public_subnets  
   enable_nat_gateway  = var.vpc_enable_nat_gateway
   tags                = var.vpc_tags
-  security_group      = var.vpc_security_group
-}
-
-#Create security group with firewall rules
-resource "aws_security_group" "my_security_group" {
-  name        = var.vpc_security_group
-  description = "security group for Ec2 instance"
-
-  ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
- ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
- # outbound from jenkis server
-  egress {
-    from_port   = 0
-    to_port     = 65535
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags= {
-    Name = var.security_group
-  }
 }
 
 # Criação da Instância EC2
@@ -74,7 +41,7 @@ module "ec2-instance" {
   instance_type          = "t2.micro"
   key_name               = "DevOps"
   monitoring             = true
-  security_group         = [var.vpc_secutity_group]
+  vpc_security_group_ids = [module.vpc.default_security_group_id]
   subnet_id              = module.vpc.public_subnets[0]
 
   tags = {
