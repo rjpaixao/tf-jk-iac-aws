@@ -42,7 +42,7 @@ module "ec2-instance" {
   key_name               = "DevOps"
   monitoring             = true
   vpc_security_group_ids = [module.vpc.default_security_group_id]
-  subnet_id              = "subnet-eddcdzz4"
+  subnet_id              = module.vpc.public_subnets[0]
 
   tags = {
     Terraform   = "true"
